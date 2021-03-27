@@ -43,8 +43,8 @@ namespace Prova_SUM_Software.Modelos
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = conectaMySQL.AbreMySQL();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select Id, Produto, Valor AS 'Preço (R$)', Cliente, Email AS 'e-mail', " +
-                "Data_Venda AS 'Data da Venda', Quantidade from Vendas";
+            cmd.CommandText = "Select Id, Cliente, Email AS 'e-mail', Produto, Quantidade, Valor AS 'Preço (R$)', " +
+                "Data_Venda AS 'Data da Venda',  from Vendas";
 
             MySqlDataAdapter adaptador = new MySqlDataAdapter();
             adaptador.SelectCommand = cmd;
