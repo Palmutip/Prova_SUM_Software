@@ -84,15 +84,22 @@ namespace Prova_SUM_Software.Formularios
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if(txtbuscacliente.Text == string.Empty)
+                    if (cbxfiltrocliente.Text == "")
                     {
-                        dgvclientes.DataSource = cliente.DtAtualizaCliente();
+                        MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
                     }
                     else
                     {
-                        dgvclientes.DataSource = cliente.DtAtualizaCliente(txtbuscacliente.Text, cbxfiltrocliente.Text);
+                        if (txtbuscacliente.Text == string.Empty)
+                        {
+                            dgvclientes.DataSource = cliente.DtAtualizaCliente();
+                        }
+                        else
+                        {
+                            dgvclientes.DataSource = cliente.DtAtualizaCliente(txtbuscacliente.Text, cbxfiltrocliente.Text);
+                        }
+                        LimpaCampos();
                     }
-                    LimpaCampos();
                 }
             }
             catch
@@ -106,15 +113,22 @@ namespace Prova_SUM_Software.Formularios
         {
             try
             {
-                if(txtbuscacliente.Text == string.Empty)
-                    {
-                    dgvclientes.DataSource = cliente.DtAtualizaCliente();
+                if (cbxfiltrocliente.Text == "")
+                {
+                    MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
                 }
                 else
                 {
-                    dgvclientes.DataSource = cliente.DtAtualizaCliente(txtbuscacliente.Text, cbxfiltrocliente.Text);
+                    if (txtbuscacliente.Text == string.Empty)
+                    {
+                        dgvclientes.DataSource = cliente.DtAtualizaCliente();
+                    }
+                    else
+                    {
+                        dgvclientes.DataSource = cliente.DtAtualizaCliente(txtbuscacliente.Text, cbxfiltrocliente.Text);
+                    }
+                    LimpaCampos();
                 }
-                LimpaCampos();
             }
             catch
             {

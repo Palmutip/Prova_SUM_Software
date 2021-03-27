@@ -39,18 +39,51 @@ namespace Prova_SUM_Software.Formularios
             pnlnovoproduto.Visible = true;
             LimpaCampos();
         }
-
         private void btncancelar_Click(object sender, EventArgs e)
         {
             pnlnovoproduto.Visible = false;
             LimpaCampos();
         }
-
         private void txtbuscaproduto_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
+                
                 if (e.KeyCode == Keys.Enter)
+                {
+                    if (cbxfiltroproduto.Text == "")
+                    {
+                        MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
+                    }
+                    else
+                    {
+                        if (txtbuscaproduto.Text == string.Empty)
+                        {
+                            dgvproduto.DataSource = produto.DtAtualizaProduto();
+                        }
+                        else
+                        {
+                            dgvproduto.DataSource = produto.DtAtualizaProduto(txtbuscaproduto.Text, cbxfiltroproduto.Text);
+                        }
+                        LimpaCampos();
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Houve algum problema em buscar os dados do produto.\nContate o suporte técnico", "Atenção");
+                
+            }
+        }
+        private void pbxbuscaproduto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbxfiltroproduto.Text == "")
+                {
+                    MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
+                }
+                else
                 {
                     if (txtbuscaproduto.Text == string.Empty)
                     {
@@ -69,28 +102,6 @@ namespace Prova_SUM_Software.Formularios
                 
             }
         }
-
-        private void pbxbuscaproduto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtbuscaproduto.Text == string.Empty)
-                {
-                    dgvproduto.DataSource = produto.DtAtualizaProduto();
-                }
-                else
-                {
-                    dgvproduto.DataSource = produto.DtAtualizaProduto(txtbuscaproduto.Text, cbxfiltroproduto.Text);
-                }
-                LimpaCampos();
-            }
-            catch
-            {
-                MessageBox.Show("Houve algum problema em buscar os dados do produto.\nContate o suporte técnico", "Atenção");
-                
-            }
-        }
-
         private void btnsalvarproduto_Click(object sender, EventArgs e)
         {
             try

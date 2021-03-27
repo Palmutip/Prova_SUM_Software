@@ -239,6 +239,40 @@ namespace Prova_SUM_Software.Formularios
             {
                 if (e.KeyCode == Keys.Enter)
                 {
+                    if (cbxfiltrovenda.Text == "")
+                    {
+                        MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
+                    }
+                    else
+                    {
+                        if (txtbuscavenda.Text == string.Empty)
+                        {
+                            dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
+                        }
+                        else
+                        {
+                            dgvvendasdomes.DataSource = venda.DtAtualizaVenda(txtbuscavenda.Text, cbxfiltrovenda.Text);
+                        }
+                        LimpaCampos();
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Houve algum problema em buscar os dados da venda.\nContate o suporte técnico", "Atenção");
+                
+            }
+        }
+        private void pbxbuscavenda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbxfiltrovenda.Text == "")
+                {
+                    MessageBox.Show("Por favor escolha um filtro para pesquisa", "Atenção");
+                }
+                else
+                {
                     if (txtbuscavenda.Text == string.Empty)
                     {
                         dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
@@ -256,29 +290,10 @@ namespace Prova_SUM_Software.Formularios
                 
             }
         }
-        private void pbxbuscavenda_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtbuscavenda.Text == string.Empty)
-                {
-                    dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
-                }
-                else
-                {
-                    dgvvendasdomes.DataSource = venda.DtAtualizaVenda(txtbuscavenda.Text, cbxfiltrovenda.Text);
-                }
-                LimpaCampos();
-            }
-            catch
-            {
-                MessageBox.Show("Houve algum problema em buscar os dados da venda.\nContate o suporte técnico", "Atenção");
-                
-            }
-        }
         private void btnenviaremail_Click(object sender, EventArgs e)
         {
             Process.Start("mailto:" + cliente.Email + "?subject=Compra Realizada&body=" + rtxtmensagem.Text);
+            LimpaCampos();
         }
     }
 }
