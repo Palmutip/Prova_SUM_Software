@@ -31,6 +31,7 @@ namespace Prova_SUM_Software.Formularios
         public FrmProduto()
         {
             InitializeComponent();
+            dgvproduto.DataSource = produto.DtAtualizaProduto();
         }
 
         private void btnnovoproduto_Click(object sender, EventArgs e)
@@ -65,7 +66,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em buscar os dados do produto.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
         }
 
@@ -86,7 +87,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em buscar os dados do produto.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
         }
 
@@ -111,7 +112,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em salvar os dados do cliente.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
             finally
             {

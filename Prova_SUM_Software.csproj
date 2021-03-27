@@ -48,10 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexao\ConectaMySQL.cs" />
-    <Compile Include="Controles\Cliente.cs" />
     <Compile Include="Modelos\EntidadeBase.cs" />
-    <Compile Include="Controles\Produto.cs" />
-    <Compile Include="Controles\Venda.cs" />
     <Compile Include="Formularios\FrmAjuda.cs">
       <SubType>Form</SubType>
     </Compile>

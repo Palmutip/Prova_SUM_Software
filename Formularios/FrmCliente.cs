@@ -68,7 +68,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em salvar os dados do cliente.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
             finally
             {
@@ -98,7 +98,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em buscar os dados do cliente.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
         }
 
@@ -119,7 +119,7 @@ namespace Prova_SUM_Software.Formularios
             catch
             {
                 MessageBox.Show("Houve algum problema em buscar os dados do cliente.\nContate o suporte técnico", "Atenção");
-                throw;
+                
             }
         }
     }

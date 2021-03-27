@@ -58,6 +58,7 @@ namespace Prova_SUM_Software.Formularios
             this.pbxbuscavenda = new System.Windows.Forms.PictureBox();
             this.cbxcliente = new System.Windows.Forms.ComboBox();
             this.cbxproduto = new System.Windows.Forms.ComboBox();
+            this.btnenviaremail = new System.Windows.Forms.Button();
             this.tblytvendas.SuspendLayout();
             this.pnlvendasdomes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvvendasdomes)).BeginInit();
@@ -125,6 +126,7 @@ namespace Prova_SUM_Software.Formularios
             // 
             // pnldados
             // 
+            this.pnldados.Controls.Add(this.btnenviaremail);
             this.pnldados.Controls.Add(this.cbxproduto);
             this.pnldados.Controls.Add(this.cbxcliente);
             this.pnldados.Controls.Add(this.btncancelarvenda);
@@ -190,7 +192,7 @@ namespace Prova_SUM_Software.Formularios
             this.rtxtmensagem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtmensagem.Location = new System.Drawing.Point(13, 321);
             this.rtxtmensagem.Name = "rtxtmensagem";
-            this.rtxtmensagem.Size = new System.Drawing.Size(335, 117);
+            this.rtxtmensagem.Size = new System.Drawing.Size(335, 84);
             this.rtxtmensagem.TabIndex = 16;
             this.rtxtmensagem.Text = "";
             // 
@@ -291,6 +293,7 @@ namespace Prova_SUM_Software.Formularios
             // 
             this.txtvalorproduto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtvalorproduto.Enabled = false;
             this.txtvalorproduto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtvalorproduto.Location = new System.Drawing.Point(213, 124);
             this.txtvalorproduto.Name = "txtvalorproduto";
@@ -346,6 +349,7 @@ namespace Prova_SUM_Software.Formularios
             this.txtbuscavenda.Name = "txtbuscavenda";
             this.txtbuscavenda.Size = new System.Drawing.Size(162, 20);
             this.txtbuscavenda.TabIndex = 14;
+            this.txtbuscavenda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtbuscavenda_KeyUp);
             // 
             // lblfiltrovenda
             // 
@@ -363,6 +367,13 @@ namespace Prova_SUM_Software.Formularios
             this.cbxfiltrovenda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxfiltrovenda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxfiltrovenda.FormattingEnabled = true;
+            this.cbxfiltrovenda.Items.AddRange(new object[] {
+            "Produto",
+            "Valor",
+            "Cliente",
+            "Email",
+            "Data_Venda",
+            "Quantidade"});
             this.cbxfiltrovenda.Location = new System.Drawing.Point(181, 61);
             this.cbxfiltrovenda.Name = "cbxfiltrovenda";
             this.cbxfiltrovenda.Size = new System.Drawing.Size(121, 21);
@@ -379,6 +390,7 @@ namespace Prova_SUM_Software.Formularios
             this.pbxbuscavenda.Size = new System.Drawing.Size(40, 30);
             this.pbxbuscavenda.TabIndex = 16;
             this.pbxbuscavenda.TabStop = false;
+            this.pbxbuscavenda.Click += new System.EventHandler(this.pbxbuscavenda_Click);
             // 
             // cbxcliente
             // 
@@ -391,6 +403,9 @@ namespace Prova_SUM_Software.Formularios
             this.cbxcliente.Name = "cbxcliente";
             this.cbxcliente.Size = new System.Drawing.Size(277, 25);
             this.cbxcliente.TabIndex = 19;
+            this.cbxcliente.SelectedIndexChanged += new System.EventHandler(this.cbxcliente_SelectedIndexChanged);
+            this.cbxcliente.Enter += new System.EventHandler(this.cbxcliente_Enter);
+            this.cbxcliente.Leave += new System.EventHandler(this.cbxcliente_Leave);
             // 
             // cbxproduto
             // 
@@ -406,6 +421,20 @@ namespace Prova_SUM_Software.Formularios
             this.cbxproduto.SelectedIndexChanged += new System.EventHandler(this.cbxproduto_SelectedIndexChanged);
             this.cbxproduto.Enter += new System.EventHandler(this.cbxproduto_Enter);
             this.cbxproduto.Leave += new System.EventHandler(this.cbxproduto_Leave);
+            // 
+            // btnenviaremail
+            // 
+            this.btnenviaremail.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnenviaremail.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnenviaremail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnenviaremail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnenviaremail.Location = new System.Drawing.Point(126, 411);
+            this.btnenviaremail.Name = "btnenviaremail";
+            this.btnenviaremail.Size = new System.Drawing.Size(110, 27);
+            this.btnenviaremail.TabIndex = 21;
+            this.btnenviaremail.Text = "Enviar e-mail";
+            this.btnenviaremail.UseVisualStyleBackColor = false;
+            this.btnenviaremail.Click += new System.EventHandler(this.btnenviaremail_Click);
             // 
             // FrmVenda
             // 
@@ -460,5 +489,6 @@ namespace Prova_SUM_Software.Formularios
         private System.Windows.Forms.PictureBox pbxbuscavenda;
         private System.Windows.Forms.ComboBox cbxproduto;
         private System.Windows.Forms.ComboBox cbxcliente;
+        private System.Windows.Forms.Button btnenviaremail;
     }
 }

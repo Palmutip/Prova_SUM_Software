@@ -55,6 +55,23 @@ namespace Prova_SUM_Software.Modelos
 
             return dt;
         }
+        public DataTable DtAtualizaVenda(string valor, string coluna)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conectaMySQL.AbreMySQL();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select Id, Produto, Valor AS 'Preço (R$)', Cliente, Email AS 'e-mail', " +
+                "Data_Venda AS 'Data da Venda', Quantidade from Vendas where " + coluna + " like '%" + valor + "%'";
+
+            MySqlDataAdapter adaptador = new MySqlDataAdapter();
+            adaptador.SelectCommand = cmd;
+
+            DataTable dt = new DataTable();
+            adaptador.Fill(dt);
+            conectaMySQL.FechaMySQL();
+
+            return dt;
+        }
         public DataTable DtBuscaTabela(string campo, string tabela)
         {
             MySqlCommand cmd = new MySqlCommand();

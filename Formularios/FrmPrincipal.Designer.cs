@@ -66,14 +66,14 @@ namespace Prova_SUM_Software
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // produtosToolStripMenuItem
             // 
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
-            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.produtosToolStripMenuItem.Text = "Produtos";
             this.produtosToolStripMenuItem.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
             // 
@@ -89,7 +89,7 @@ namespace Prova_SUM_Software
             // 
             this.vendasRealizadasToolStripMenuItem.Name = "vendasRealizadasToolStripMenuItem";
             this.vendasRealizadasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.vendasRealizadasToolStripMenuItem.Text = "Vendas Realizadas";
+            this.vendasRealizadasToolStripMenuItem.Text = "Vendas do mês";
             this.vendasRealizadasToolStripMenuItem.Click += new System.EventHandler(this.vendasRealizadasToolStripMenuItem_Click);
             // 
             // ajudaToolStripMenuItem
@@ -103,8 +103,9 @@ namespace Prova_SUM_Software
             // comoUsarToolStripMenuItem
             // 
             this.comoUsarToolStripMenuItem.Name = "comoUsarToolStripMenuItem";
-            this.comoUsarToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.comoUsarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.comoUsarToolStripMenuItem.Text = "Como Usar";
+            this.comoUsarToolStripMenuItem.Click += new System.EventHandler(this.comoUsarToolStripMenuItem_Click);
             // 
             // lblnomedosistema
             // 

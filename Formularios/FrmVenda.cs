@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Prova_SUM_Software.Formularios
         ProdutoDTO produto = new ProdutoDTO();
         VendaDTO venda = new VendaDTO();
         bool buscando = false;
+        string Email = string.Empty;
         #endregion
 
         #region Funções gerais do software
@@ -39,6 +41,9 @@ namespace Prova_SUM_Software.Formularios
             ntxtqtdproduto.Value = 0;
             dtpdatavenda.Value = DateTime.Today;
             rtxtmensagem.Text = string.Empty;
+
+            //Setando a variavel de controle dos TextBox como false
+            buscando = false;
         }
         private void BloqueiaCampos()
         {
@@ -60,6 +65,8 @@ namespace Prova_SUM_Software.Formularios
         }
         private void LiberaCampos()
         {
+            LimpaCampos();
+
             dgvvendasdomes.Enabled = true;
             //txtbuscavenda.Text = string.Empty;
             txtbuscavenda.Enabled = true;
@@ -71,11 +78,11 @@ namespace Prova_SUM_Software.Formularios
             btnsalvavenda.Visible = false;
             btncancelarvenda.Enabled = false;
             btncancelarvenda.Visible = false;
-
-            LimpaCampos();
+            rtxtmensagem.Enabled = false;
         }
         #endregion
 
+        //Construtor do formulário
         public FrmVenda()
         {
             InitializeComponent();
@@ -83,13 +90,13 @@ namespace Prova_SUM_Software.Formularios
             //Atualizando os dados do DataGridView
             dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
 
-            //Alimentando as ComboBox
+            //Alimentando a ComboBox dos Produtos
             cbxproduto.DataSource = venda.DtBuscaTabela("Nome","Produtos");
-            //cbxproduto.DisplayMember = "Produto";
             cbxproduto.ValueMember = "Nome";
             cbxproduto.SelectedIndex = -1;
+
+            //Alimentando a ComboBox dos Clientes
             cbxcliente.DataSource = venda.DtBuscaTabela("Nome", "Clientes");
-            //cbxcliente.DisplayMember = "Cliente";
             cbxcliente.ValueMember = "Nome";
             cbxcliente.SelectedIndex = -1;
         }
@@ -98,16 +105,15 @@ namespace Prova_SUM_Software.Formularios
         {
             BloqueiaCampos();
         }
-
         private void btncancelarvenda_Click(object sender, EventArgs e)
         {
             LiberaCampos();
         }
-
         private void btnsalvavenda_Click(object sender, EventArgs e)
         {
             try
             {
+                buscando = false;
                 if (ntxtqtdproduto.Value <= 0)
                 {
                     MessageBox.Show("Quantidade deve ser maior que zero", "Atenção");
@@ -150,7 +156,6 @@ namespace Prova_SUM_Software.Formularios
                 MessageBox.Show("Venda realizada!", "Sucesso");
             }
         }
-
         private void dgvvendasdomes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -160,7 +165,7 @@ namespace Prova_SUM_Software.Formularios
                 novavenda.SelecionaVenda();
 
                 //Varivel de controle das combobox
-                //buscando = true;
+                buscando = true;
 
                 //Atribuindo os campos do produto
                 cbxproduto.SelectedValue = novavenda.NomeProduto;
@@ -169,8 +174,14 @@ namespace Prova_SUM_Software.Formularios
                 txtvalorproduto.Text = novavenda.ValorProduto.ToString();
 
                 //Atribuindo os campos do cliente
-                cbxproduto.SelectedValue = novavenda.EmailCliente;
+                cbxcliente.SelectedValue = novavenda.NomeCliente;
                 txtemailcliente.Text = novavenda.EmailCliente;
+                cliente.Email = novavenda.EmailCliente;
+
+                //Habilita o controle para digitar um e-mail
+                rtxtmensagem.Enabled = true;
+
+                rtxtmensagem.Text = string.Empty;
             }
             catch
             {
@@ -178,29 +189,96 @@ namespace Prova_SUM_Software.Formularios
             }
             finally
             {
-                //buscando = false;
+                buscando = false;
             }
 
         }
-
         private void cbxproduto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if(buscando)
+            try
             {
-                string aux = cbxproduto.SelectedValue.ToString();
-                txtvalorproduto.Text = produto.SelecionaValorProduto(aux);
+                if (buscando)
+                {
+                    string aux = cbxproduto.SelectedValue.ToString();
+                    txtvalorproduto.Text = produto.SelecionaValorProduto(aux);
+                }
             }
+            catch { }
         }
-
         private void cbxproduto_Enter(object sender, EventArgs e)
         {
             buscando = true;
         }
-
         private void cbxproduto_Leave(object sender, EventArgs e)
         {
             buscando = false;
+        }
+        private void cbxcliente_Enter(object sender, EventArgs e)
+        {
+            buscando = true;
+        }
+        private void cbxcliente_Leave(object sender, EventArgs e)
+        {
+            buscando = false;
+        }
+        private void cbxcliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (buscando)
+                {
+                    string aux = cbxcliente.SelectedValue.ToString();
+                    txtemailcliente.Text = cliente.SelecionaEmailCliente(aux);
+                }
+            }
+            catch { }
+        }
+        private void txtbuscavenda_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (txtbuscavenda.Text == string.Empty)
+                    {
+                        dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
+                    }
+                    else
+                    {
+                        dgvvendasdomes.DataSource = venda.DtAtualizaVenda(txtbuscavenda.Text, cbxfiltrovenda.Text);
+                    }
+                    LimpaCampos();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Houve algum problema em buscar os dados da venda.\nContate o suporte técnico", "Atenção");
+                
+            }
+        }
+        private void pbxbuscavenda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtbuscavenda.Text == string.Empty)
+                {
+                    dgvvendasdomes.DataSource = venda.DtAtualizaVenda();
+                }
+                else
+                {
+                    dgvvendasdomes.DataSource = venda.DtAtualizaVenda(txtbuscavenda.Text, cbxfiltrovenda.Text);
+                }
+                LimpaCampos();
+            }
+            catch
+            {
+                MessageBox.Show("Houve algum problema em buscar os dados da venda.\nContate o suporte técnico", "Atenção");
+                
+            }
+        }
+        private void btnenviaremail_Click(object sender, EventArgs e)
+        {
+            Process.Start("mailto:" + cliente.Email + "?subject=Compra Realizada&body=" + rtxtmensagem.Text);
         }
     }
 }

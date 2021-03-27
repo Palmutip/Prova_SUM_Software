@@ -66,5 +66,11 @@ namespace Prova_SUM_Software
                 nt.Start();
             }
         }
+
+        private void comoUsarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Para realizar uma venda no sistema comercial:\n\n-Realize o Cadastro do seu Produto.\n-Realize o Cadastro de seu Cliente." +
+                "\n-Acesse o menu de vendas e clique em Nova Venda.\n-Depois de preencher os campos, clique em confirmar venda.", "Ajuda");
+        }
     }
 }

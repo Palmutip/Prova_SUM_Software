@@ -60,5 +60,19 @@ namespace Prova_SUM_Software.Modelos
 
             return dt;
         }
+        public string SelecionaEmailCliente(string nome)
+        {
+            string SQL;
+            SQL = "Select Email from Clientes where Nome like '%" + nome + "%'";
+
+            MySqlDataReader dados = conectaMySQL.ExecutaConsulta(SQL);
+
+            if (dados.Read())
+            {
+                Email = dados["Email"].ToString();
+            }
+            conectaMySQL.FechaMySQL();
+            return Email;
+        }
     }
 }
