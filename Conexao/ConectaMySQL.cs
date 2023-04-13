@@ -9,10 +9,15 @@ namespace Prova_SUM_Software.Conexao
 {
     class ConectaMySQL
     {
-        //private static FuncoesBanco func = new FuncoesBanco();
+        private string server = string.Empty;
+        private string port = string.Empty;
+        private string database = string.Empty;
+        private string uid = string.Empty;
+        private string password = string.Empty;
+
         public MySqlConnection AbreMySQL()
         {
-                MySqlConnection conexao = new MySqlConnection("SERVER=108.179.252.199;PORT=3306;DATABASE=mysola97_prova;UID=mysola97_testeus ;PASSWORD=SenhaForte321123;Convert Zero Datetime=True");
+                MySqlConnection conexao = new MySqlConnection($"SERVER={server};PORT={port};DATABASE={database};UID={uid};PASSWORD={password};Convert Zero Datetime=True");
                 conexao.Open();
                 return conexao;
 
